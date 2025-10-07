@@ -11,7 +11,7 @@ const PORT = 3004;
 // TODO: Configurar storage do multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadDir = /*TODO: './uploads'*/;
+        const uploadDir =  './uploads';
         // TODO: Crie o diretório se não existir
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir);
@@ -19,15 +19,15 @@ const storage = multer.diskStorage({
         cb(null, uploadDir);
     },
     filename: (req, file, cb) => {
-        // TODO: Gere nome único com timestamp
-        const uniqueName = /TODO: Date.now() + '-' + file.originalname/;
+       
+        const uniqueName =  Date.now() + '-' + file.originalname;
         cb(null, uniqueName);
     }
 });
 
 // TODO: Configurar filtros de arquivo
 const fileFilter = (req, file, cb) => {
-    const allowedTypes = /TODO: ['.jpg', '.jpeg', '.png', '.pdf']/;
+    const allowedTypes =  ['.jpg', '.jpeg', '.png', '.pdf'];
     const fileExt = /TODO: path.extname(file.originalname).toLowerCase()/;
     
     if (allowedTypes.includes(fileExt)) {
@@ -42,7 +42,7 @@ const upload = multer({
     storage,
     fileFilter,
     limits: {
-        fileSize: /* TODO: 5 * 1024 * 1024 // 5MB */
+        fileSize:  1024 * 1024 // 5MB 
     }
 });
 
